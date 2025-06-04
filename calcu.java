@@ -16,8 +16,8 @@ public class calcu {
 		// characters
 		do {
 			System.out.println("\n=== Simple Menu ===");
-			System.out.println("1. calculator");
-			System.out.println("2. sentence counter");
+			System.out.println("1. Calculator");
+			System.out.println("2. Binary Calculator");
 			System.out.println("3. ");
 			System.out.println("4. ");
 			System.out.println("5. ");
@@ -149,12 +149,74 @@ public class calcu {
 
 				do {
 					input.nextLine();
-					System.out.print("Enter sentence: ");
-					String test = input.nextLine();
-					System.out.println("the Sentence is:" + test);
+					System.out.print("\n<== Binary Calculator ==>");
+					
+					long binary1, binary2;
+					char def;
+
+					while (true) {
+						System.out.print("\nEnter First Binary Number: ");
+						if (input.hasNextInt()) {
+							binary1 = input.nextLong();
+							break;
+
+						} else {
+							System.out.print("\nEnter number only: \n");
+							input.next();
+						}
+					}
+					while (true) {
+						System.out.print("\nEnter Second Binary Number: ");
+						if (input.hasNextInt()) {
+							binary2 = input.nextLong();
+							break;
+
+						} else {
+							System.out.print("\nEnter number only, no Letter: \n");
+							input.next();
+						}
+					}
+					
+					while (true) {
+						System.out.println("A. Addition");
+						System.out.println("B. Subraction");
+						System.out.println("C. Multiplication");
+						System.out.println("D. Division\n");
+						System.out.print("Enter Operator (A/B/C/D): ");
+
+						String inputOp = input.next(); // read full input
+						if (inputOp.length() == 1) {
+							def = Character.toUpperCase(inputOp.charAt(0));
+							if (def == 'A' || def == 'B' || def == 'C' || def == 'D') {
+								break; // valid operator
+							}
+						}
+						System.out.println("Invalid operator. Please enter A, B, C, or D.\n");
+						System.out.println("A. Addition");
+						System.out.println("B. Subraction");
+						System.out.println("C. Multiplication");
+						System.out.println("D. Division\n");
+					}
+
+					
+					switch (def) {
+					case 'A' :
+						System.out.println("\n==ADDITION==\n");
+						
+						binaryAddition(binary1, binary2);
+
+				      
+				        
+						break;
+					default: 
+						
+						System.out.println("Invalid input. Please enter a number.");
+					
+					}
+					
 
 					// Call the count method to analyze the characters in the test string
-					count(test);
+					
 					System.out.println("\nDo you want to:");
 					System.out.println("1. Repeat this activity");
 					System.out.println("2. Return to main menu");
@@ -194,44 +256,28 @@ public class calcu {
 
 	}
 
-	public static void count(String x) {
-		// Convert the input string to a character array
-		char[] ch = x.toCharArray();
+	public static void binaryAddition(long binary1, long binary2) {
+		int i = 0, remainder = 0;
+	    int[] sum = new int[20];
 
-		// Initialize counters for letters, spaces, numbers, and other characters
-		int letter = 0;
-		int space = 0;
-		int num = 0;
-		int other = 0;
+	    while (binary1 != 0 || binary2 != 0) {
+	        sum[i++] = (int)((binary1 % 10 + binary2 % 10 + remainder) % 2);
+	        remainder = (int)((binary1 % 10 + binary2 % 10 + remainder) / 2);
+	        binary1 = binary1 / 10;
+	        binary2 = binary2 / 10;
+	    }
 
-		// Iterate through the character array to categorize characters
-		for (int i = 0; i < x.length(); i++) {
-			// Check if the character is a letter
-			if (Character.isLetter(ch[i])) {
-				letter++;
-			}
-			// Check if the character is a digit (number)
-			else if (Character.isDigit(ch[i])) {
-				num++;
-			}
-			// Check if the character is a space
-			else if (Character.isSpaceChar(ch[i])) {
-				space++;
-			}
-			// Character falls into the "other" category if none of the above conditions are
-			// met
-			else {
-				other++;
-			}
-		}
+	    if (remainder != 0) {
+	        sum[i++] = remainder;
+	    }
 
-		// Display the original string
-
-		// Display the counts of letters, spaces, numbers, and other characters
-		System.out.println("letter: " + letter);
-		System.out.println("space: " + space);
-		System.out.println("number: " + num);
-		System.out.println("other: " + other);
+	    System.out.print("Sum of two binary numbers: ");
+	    while (i > 0) {
+	        System.out.print(sum[--i]);
+	    }
+	    System.out.println();
+		
 	}
+	
 
 }
