@@ -204,9 +204,20 @@ public class calcu {
 						System.out.println("\n==ADDITION==\n");
 						
 						binaryAddition(binary1, binary2);
-
-				      
 				        
+						break;
+					case 'B' :
+						System.out.println("\n==SUBTRACTION==\n");
+						break;
+						
+					case 'C' :
+						System.out.println("\n==MULTIPLICATION==\n");
+						
+						binaryMultiplication(binary1, binary2);
+						break;
+						
+					case 'D' :
+						System.out.println("\n==DIVISION==\n");
 						break;
 					default: 
 						
@@ -278,6 +289,51 @@ public class calcu {
 	    System.out.println();
 		
 	}
-	
+	public static void binaryMultiplication(long binary1, long binary2) {
+		
+		long multiply = 0;
+		int digit;
+		long factor = 1;
+		long tempBinary1 = binary1;
+		  
+		  
+		  
+		  // Process binary2 to calculate the product
+		while (binary2 != 0) {
+            digit = (int) (binary2 % 10);
+            if (digit == 1) {
+                long shiftedBinary1 = tempBinary1 * factor;
+                multiply = binaryProduct(shiftedBinary1, multiply);
+            }
+            binary2 = binary2 / 10;
+            factor *= 10;
+        }
+
+        System.out.println("Product of two binary numbers: " + multiply);
+    }
+
+    // Method to add two binary numbers (used in multiplication)
+    public static long binaryProduct(long binary1, long binary2) {
+        int i = 0, remainder = 0;
+        int[] sum = new int[40]; // Buffer size
+        long result = 0;
+
+        while (binary1 != 0 || binary2 != 0) {
+            sum[i++] = (int) ((binary1 % 10 + binary2 % 10 + remainder) % 2);
+            remainder = (int) ((binary1 % 10 + binary2 % 10 + remainder) / 2);
+            binary1 /= 10;
+            binary2 /= 10;
+        }
+
+        if (remainder != 0) {
+            sum[i++] = remainder;
+        }
+
+        while (--i >= 0) {
+            result = result * 10 + sum[i];
+        }
+
+        return result;
+    }
 
 }
