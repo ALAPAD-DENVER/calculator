@@ -18,7 +18,7 @@ public class calcu {
 			System.out.println("\n=== Simple Menu ===");
 			System.out.println("1. Calculator");
 			System.out.println("2. Binary Calculator");
-			System.out.println("3. ");
+			System.out.println("3. Convertion");
 			System.out.println("4. ");
 			System.out.println("5. ");
 			System.out.println("6. Exit");
@@ -30,7 +30,6 @@ public class calcu {
 			case 1:
 
 				do {
-					input.nextLine();
 					System.out.println("\ncalculator");
 
 					// System.out.print("\nEnter First number: ");
@@ -81,12 +80,13 @@ public class calcu {
 					int num2;
 					while (true) {
 						System.out.print("\nEnter Second number: ");
-						if(input.hasNextInt()) {
+						if (input.hasNextInt()) {
 							num2 = input.nextInt();
 							break;
-						}else {
+						} else {
 							System.out.print("\nEnter number only: \n");
-							input.next();						}
+							input.next();
+						}
 
 					}
 
@@ -148,11 +148,11 @@ public class calcu {
 			case 2:
 
 				do {
-					input.nextLine();
+
 					System.out.print("\n<== Binary Calculator ==>");
-					
+
 					long binary1, binary2;
-					char def;
+					char binaryOperator;
 
 					while (true) {
 						System.out.print("\nEnter First Binary Number: ");
@@ -176,7 +176,7 @@ public class calcu {
 							input.next();
 						}
 					}
-					
+
 					while (true) {
 						System.out.println("A. Addition");
 						System.out.println("B. Subraction");
@@ -186,8 +186,9 @@ public class calcu {
 
 						String inputOp = input.next(); // read full input
 						if (inputOp.length() == 1) {
-							def = Character.toUpperCase(inputOp.charAt(0));
-							if (def == 'A' || def == 'B' || def == 'C' || def == 'D') {
+							binaryOperator = Character.toUpperCase(inputOp.charAt(0));
+							if (binaryOperator == 'A' || binaryOperator == 'B' || binaryOperator == 'C'
+									|| binaryOperator == 'D') {
 								break; // valid operator
 							}
 						}
@@ -198,43 +199,219 @@ public class calcu {
 						System.out.println("D. Division\n");
 					}
 
-					
-					switch (def) {
-					case 'A' :
+					switch (binaryOperator) {
+					case 'A':
 						System.out.println("\n==ADDITION==\n");
-						
+
 						binaryAddition(binary1, binary2);
-				        
+
 						break;
-					case 'B' :
+					case 'B':
 						System.out.println("\n==SUBTRACTION==\n");
 						break;
-						
-					case 'C' :
+
+					case 'C':
 						System.out.println("\n==MULTIPLICATION==\n");
-						
+
 						binaryMultiplication(binary1, binary2);
 						break;
-						
-					case 'D' :
+
+					case 'D':
 						System.out.println("\n==DIVISION==\n");
 						break;
-					default: 
-						
+					default:
+
 						System.out.println("Invalid input. Please enter a number.");
-					
+
 					}
-					
 
 					// Call the count method to analyze the characters in the test string
-					
+
 					System.out.println("\nDo you want to:");
 					System.out.println("1. Repeat this activity");
 					System.out.println("2. Return to main menu");
-					System.out.print("Enter your choice: ");
 					// repeat = input.nextInt();
 					while (true) {
 						System.out.print("Enter your choice: ");
+						if (input.hasNextInt()) {
+							repeat = input.nextInt();
+							if (repeat == 1 || repeat == 2) {
+								break;
+							} else {
+								System.out.println("Invalid choice. Please enter 1 or 2 only.");
+							}
+						} else {
+							System.out.println("Invalid input. Please enter a number.");
+							input.next(); // consume invalid input
+						}
+
+					}
+
+				} while (repeat == 1);
+
+				break;
+// Convertion
+			case 3:
+				long binary1, decimal = 0, j = 1, remainder;
+				char convertionType, convertionTo;
+				
+
+				System.out.print("\n <== CONVERTION ==>");
+
+				do {
+					while (true) {
+						System.out.println("\nA. Binary");
+						System.out.println("B. Decimal");
+						System.out.println("C. Hexadecimal");
+						System.out.println("D. Octal\n");
+						System.out.print("Enter Converter Type (A/B/C/D): ");
+
+						String inputOp = input.next(); // read full input
+						if (inputOp.length() == 1) {
+							convertionType = Character.toUpperCase(inputOp.charAt(0));
+							if (convertionType == 'A' || convertionType == 'B' || convertionType == 'C'
+									|| convertionType == 'D') {
+								break; // valid operator
+							}
+						}
+						System.out.println("Invalid operator. Please enter A, B, C, or D.\n");
+					}
+
+					switch (convertionType) {
+
+//convertiontype
+					case 'A':
+						System.out.println("\n <== Binary to ==>");
+
+						while (true) {
+
+							System.out.println("A. Decimal");
+							System.out.println("B. Hexadecimal");
+							System.out.println("C. Octal\n");
+							System.out.print("Enter Converter Type (A/B/C): ");
+
+							String inputOp = input.next(); // read full input
+							if (inputOp.length() == 1) {
+								convertionTo = Character.toUpperCase(inputOp.charAt(0));
+								if (convertionTo == 'A' || convertionTo == 'B' || convertionTo == 'C'
+										|| convertionTo == 'D') {
+									break; // valid operator
+								}
+							}
+							System.out.println("Invalid operator. Please enter A, B, or C.\n");
+
+							System.out.println("A. Decimal");
+							System.out.println("B. Hexadecimal");
+							System.out.println("C. Octal\n");
+						}
+
+						switch (convertionTo) {
+
+//Convertion to
+						case 'A':
+
+							while (true) {
+								System.out.print("\nEnter Binary Number: ");
+								if (input.hasNextInt()) {
+									binary1 = input.nextLong();
+									break;
+
+								} else {
+									System.out.print("\nEnter number only: \n");
+									input.next();
+								}
+							}
+
+							while (binary1 != 0) {
+								remainder = binary1 % 10;
+								decimal = decimal + remainder * j;
+								j = j * 2;
+								binary1 = binary1 / 10;
+							}
+
+							// Display the decimal representation of the binary number
+							System.out.println("Decimal Number: " + decimal);
+
+							break;
+							
+						case 'B':
+							int[] hex = new int[1000];
+					        int i = 1, h = 0, rem, dec = 0, bin;
+							
+					        
+					        System.out.print("Enter Binary Number: ");
+					        bin = input.nextInt();
+
+					        // Convert the binary number to decimal
+					        while (bin > 0) {
+					            rem = bin % 2;
+					            dec = dec + rem * i;
+					            i = i * 2;
+					            bin = bin / 10;
+					        }
+					        i = 0;
+
+					        // Convert the decimal number to hexadecimal
+					        while (dec != 0) {
+					            hex[i] = dec % 16;
+					            dec = dec / 16;
+					            i++;
+					        }
+
+					        // Display the hexadecimal value
+					        System.out.print("Hexadecimal value: ");
+					        for (h = i - 1; h >= 0; h--) {
+					            if (hex[h] > 9) {
+					                System.out.print((char)(hex[h] + 55));
+					            } else {
+					                System.out.print(hex[h]);
+					            }
+					        }
+					        System.out.print("\n");
+					        
+							break;
+							
+						default:
+							System.out.println("Invalid Conver to. Please Enter A, B, or C.\n");
+
+						}
+
+						break;
+
+					default:
+						System.out.println("Invalid input. Please enter a number.");
+
+					}
+
+//					while (true) {
+//						System.out.print("\nEnter First Binary Number: ");
+//						if (input.hasNextInt()) {
+//							binary1 = input.nextLong();
+//							break;
+//
+//						} else {
+//							System.out.print("\nEnter number only: \n");
+//							input.next();
+//						}
+//					}
+//					while (true) {
+//						System.out.print("\nEnter Second Binary Number: ");
+//						if (input.hasNextInt()) {
+//							binary2 = input.nextLong();
+//							break;
+//
+//						} else {
+//							System.out.print("\nEnter number only, no Letter: \n");
+//							input.next();
+//						}
+//					}
+
+					System.out.println("\nDo you want to:");
+					System.out.println("1. Repeat this activity");
+					System.out.println("2. Return to main menu");
+
+					while (true) {
+						System.out.print("\nEnter your choice: ");
 						if (input.hasNextInt()) {
 							repeat = input.nextInt();
 							if (repeat == 1 || repeat == 2) {
@@ -269,71 +446,70 @@ public class calcu {
 
 	public static void binaryAddition(long binary1, long binary2) {
 		int i = 0, remainder = 0;
-	    int[] sum = new int[20];
+		int[] sum = new int[20];
 
-	    while (binary1 != 0 || binary2 != 0) {
-	        sum[i++] = (int)((binary1 % 10 + binary2 % 10 + remainder) % 2);
-	        remainder = (int)((binary1 % 10 + binary2 % 10 + remainder) / 2);
-	        binary1 = binary1 / 10;
-	        binary2 = binary2 / 10;
-	    }
+		while (binary1 != 0 || binary2 != 0) {
+			sum[i++] = (int) ((binary1 % 10 + binary2 % 10 + remainder) % 2);
+			remainder = (int) ((binary1 % 10 + binary2 % 10 + remainder) / 2);
+			binary1 = binary1 / 10;
+			binary2 = binary2 / 10;
+		}
 
-	    if (remainder != 0) {
-	        sum[i++] = remainder;
-	    }
+		if (remainder != 0) {
+			sum[i++] = remainder;
+		}
 
-	    System.out.print("Sum of two binary numbers: ");
-	    while (i > 0) {
-	        System.out.print(sum[--i]);
-	    }
-	    System.out.println();
-		
+		System.out.print("Sum of two binary numbers: ");
+		while (i > 0) {
+			System.out.print(sum[--i]);
+		}
+		System.out.println();
+
 	}
+
 	public static void binaryMultiplication(long binary1, long binary2) {
-		
+
 		long multiply = 0;
 		int digit;
 		long factor = 1;
 		long tempBinary1 = binary1;
-		  
-		  
-		  
-		  // Process binary2 to calculate the product
+
+		// Process binary2 to calculate the product
 		while (binary2 != 0) {
-            digit = (int) (binary2 % 10);
-            if (digit == 1) {
-                long shiftedBinary1 = tempBinary1 * factor;
-                multiply = binaryProduct(shiftedBinary1, multiply);
-            }
-            binary2 = binary2 / 10;
-            factor *= 10;
-        }
+			digit = (int) (binary2 % 10);
+			if (digit == 1) {
+				long shiftedBinary1 = tempBinary1 * factor;
+				multiply = binaryProduct(shiftedBinary1, multiply);
+			}
+			binary2 = binary2 / 10;
+			factor *= 10;
+		}
 
-        System.out.println("Product of two binary numbers: " + multiply);
-    }
+		System.out.println("Product of two binary numbers: " + multiply);
+	}
 
-    // Method to add two binary numbers (used in multiplication)
-    public static long binaryProduct(long binary1, long binary2) {
-        int i = 0, remainder = 0;
-        int[] sum = new int[40]; // Buffer size
-        long result = 0;
+	// Method to add two binary numbers (used in multiplication)
+	public static long binaryProduct(long binary1, long binary2) {
+		int i = 0, remainder = 0;
+		int[] sum = new int[40]; // Buffer size
+		long result = 0;
 
-        while (binary1 != 0 || binary2 != 0) {
-            sum[i++] = (int) ((binary1 % 10 + binary2 % 10 + remainder) % 2);
-            remainder = (int) ((binary1 % 10 + binary2 % 10 + remainder) / 2);
-            binary1 /= 10;
-            binary2 /= 10;
-        }
+		while (binary1 != 0 || binary2 != 0) {
+			sum[i++] = (int) ((binary1 % 10 + binary2 % 10 + remainder) % 2);
+			remainder = (int) ((binary1 % 10 + binary2 % 10 + remainder) / 2);
+			binary1 /= 10;
+			binary2 /= 10;
+		}
 
-        if (remainder != 0) {
-            sum[i++] = remainder;
-        }
+		if (remainder != 0) {
+			sum[i++] = remainder;
+		}
 
-        while (--i >= 0) {
-            result = result * 10 + sum[i];
-        }
+		while (--i >= 0) {
+			result = result * 10 + sum[i];
+		}
 
-        return result;
-    }
+		return result;
+	}
 
 }
