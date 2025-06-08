@@ -300,20 +300,20 @@ public class calcu {
 							}
 							System.out.println("Invalid operator. Please enter A, B, or C.\n");
 
-							System.out.println("A. Decimal");
-							System.out.println("B. Hexadecimal");
-							System.out.println("C. Octal\n");
 						}
 
 						switch (convertionTo) {
 
 //Convertion to
 						case 'A':
+							
+							long binary2;
 
 							while (true) {
 								System.out.print("\nEnter Binary Number: ");
 								if (input.hasNextInt()) {
-									binary1 = input.nextLong();
+									binary2 = input.nextLong();
+									binary1 = binary2;
 									break;
 
 								} else {
@@ -330,17 +330,18 @@ public class calcu {
 							}
 
 							// Display the decimal representation of the binary number
-							System.out.println("Decimal Number: " + decimal);
+							System.out.println("Equivalent Decimal Number of " + binary2 + " is :  " + decimal);
 
 							break;
 							
 						case 'B':
 							int[] hex = new int[1000];
-					        int i = 1, h = 0, rem, dec = 0, bin;
+					        int i = 1, h = 0, rem, dec = 0, bin, bin1;
 							
 					        
 					        System.out.print("Enter Binary Number: ");
-					        bin = input.nextInt();
+					        bin1 = input.nextInt();
+					        bin = bin1;
 
 					        // Convert the binary number to decimal
 					        while (bin > 0) {
@@ -359,7 +360,7 @@ public class calcu {
 					        }
 
 					        // Display the hexadecimal value
-					        System.out.print("Hexadecimal value: ");
+					        System.out.print("Equivalent Hexadecimal value of " + bin1 + " is : ");
 					        for (h = i - 1; h >= 0; h--) {
 					            if (hex[h] > 9) {
 					                System.out.print((char)(hex[h] + 55));
@@ -369,6 +370,43 @@ public class calcu {
 					        }
 					        System.out.print("\n");
 					        
+							break;
+						case 'C' :
+							int binnum, binnum1, decnum = 0, quot, d;
+							i = 1;
+					        int octnum[] = new int[100];
+
+					        // Create a Scanner object to read input from the user
+					       
+
+					        // Prompt the user to input a binary number
+					        System.out.print("Enter Binary Number : ");
+					        binnum = input.nextInt();
+					        binnum1 = binnum;
+
+					        // Convert the binary number to decimal
+					        while (binnum > 0) {
+					            rem = binnum % 10;
+					            decnum = decnum + rem * i;
+					            i = i * 2;
+					            binnum = binnum / 10;
+					        }
+
+					        i = 1;
+					        quot = decnum;
+
+					        // Convert the decimal number to octal
+					        while (quot > 0) {
+					            octnum[i++] = quot % 8;
+					            quot = quot / 8;
+					        }
+
+					        // Display the equivalent octal value of the original binary number
+					        System.out.print("Equivalent Octal Value of " + binnum1 + " is : ");
+					        for (d = i - 1; d > 0; d--) {
+					            System.out.print(octnum[d]);
+					        }
+					        System.out.print("\n");
 							break;
 							
 						default:
